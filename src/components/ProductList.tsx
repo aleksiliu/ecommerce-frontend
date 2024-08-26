@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import LoadingSpinner from './LoadingSpinner';
 import ProductCard from './ProductCard';
 import type { Product } from '../types';
+import SkeletonLoader from './SkeletonLoader';
 
 const ProductList = () => {
     const [state, setState] = useState<{ products: Product[]; loading: boolean; error: string | null }>({
@@ -28,8 +28,14 @@ const ProductList = () => {
     }, []);
 
     if (state.loading) {
-        return <LoadingSpinner />;
-    }
+        return (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 my-8">
+            {Array.from({ length: 12 }).map((_, index) => (
+              <SkeletonLoader key={index} />
+            ))}
+          </div>
+        );
+      }
 
     if (state.error) {
         return <div>Error: {state.error}</div>;
