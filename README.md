@@ -24,7 +24,7 @@ A simple e-commerce product page that fetches product data from an API and displ
 
 ### Links
 
-- Live Site URL:
+- Live Site URL: [My Store](https://zesty-dragon-b6cc01.netlify.app/)
 
 ### Technologies Used
 
