@@ -36,7 +36,7 @@ const ProductList = () => {
     }
 
     return (
-        <div>
+        <div className="grid grid-cols-3 gap-6 my-8">
             {state.products.map(product => (
             <ProductCard key={product.id} product={product} />
             ))}
