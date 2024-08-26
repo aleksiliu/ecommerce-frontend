@@ -6,7 +6,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
     <div className="overflow-hidden rounded-lg transform shadow-md duration-300 hover:scale-105 hover:shadow-lg">
       <div className="relative w-full h-48">
         <img
-          className="absolute inset-0 w-full h-full object-cover object-center"
+          className="absolute inset-0 w-full h-full object-contain object-center"
           src={product.image}
           alt={product.title}
         />
