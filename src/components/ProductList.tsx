@@ -30,16 +30,19 @@ const ProductList = () => {
 
     if (state.loading) {
         return (
+          <>
+          <Filter sortOrder={sortOrder} setSortOrder={setSortOrder} />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 my-8">
             {Array.from({ length: 12 }).map((_, index) => (
               <SkeletonLoader key={index} />
             ))}
           </div>
+          </>
         );
       }
 
     if (state.error) {
-        return <div>Error: {state.error}</div>;
+        return <div>Network Error: {state.error}. Try again later.</div>;
     }
 
     const sortedAndFilteredProducts = [...state.products]
@@ -56,7 +59,7 @@ const ProductList = () => {
     return (
         <>
             <Filter sortOrder={sortOrder} setSortOrder={setSortOrder} />
-            <div className="grid grid-cols-3 gap-6 my-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 my-8">
                 {sortedAndFilteredProducts.map(product => (
                 <ProductCard key={product.id} product={product} />
             ))}
