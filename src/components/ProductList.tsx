@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import ProductCard from './ProductCard';
 import type { Product } from '../types';
 import SkeletonLoader from './SkeletonLoader';
+import Filter from './Filter';
 
 const ProductList = () => {
     const [state, setState] = useState<{ products: Product[]; loading: boolean; error: string | null }>({
@@ -9,6 +10,7 @@ const ProductList = () => {
         loading: true,
         error: null,
     });
+    const [sortOrder, setSortOrder] = useState<string>('default');
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -41,12 +43,26 @@ const ProductList = () => {
         return <div>Error: {state.error}</div>;
     }
 
+    const sortedAndFilteredProducts = [...state.products]
+    .sort((a, b) => {
+        if (sortOrder === 'low-to-high') {
+          return a.price - b.price;
+        } else if (sortOrder === 'high-to-low') {
+          return b.price - a.price;
+        }
+        return 0;
+      });
+
+
     return (
-        <div className="grid grid-cols-3 gap-6 my-8">
-            {state.products.map(product => (
-            <ProductCard key={product.id} product={product} />
+        <>
+            <Filter sortOrder={sortOrder} setSortOrder={setSortOrder} />
+            <div className="grid grid-cols-3 gap-6 my-8">
+                {sortedAndFilteredProducts.map(product => (
+                <ProductCard key={product.id} product={product} />
             ))}
-        </div>
+            </div>
+        </>
     );
 };
 
