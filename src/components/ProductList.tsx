@@ -1,13 +1,7 @@
 import { useEffect, useState } from 'react';
 import LoadingSpinner from './LoadingSpinner';
-
-interface Product {
-    id: number;
-    title: string;
-    price: number;
-    category: string;
-    image: string;
-}
+import ProductCard from './ProductCard';
+import type { Product } from '../types';
 
 const ProductList = () => {
     const [state, setState] = useState<{ products: Product[]; loading: boolean; error: string | null }>({
@@ -24,6 +18,7 @@ const ProductList = () => {
                     throw new Error('Network response was not ok');
                 }
                 const data = await response.json();
+                console.log(data)
                 setState({ products: data, loading: false, error: null });
             } catch (error) {
                 setState({ products: [], loading: false, error: (error instanceof Error) ? error.message : 'An unknown error occurred' });
@@ -43,12 +38,7 @@ const ProductList = () => {
     return (
         <div>
             {state.products.map(product => (
-                <div key={product.id}>
-                    <img src={product.image} alt={product.title} />
-                    <h2>{product.title}</h2>
-                    <p>${product.price}</p>
-                    <button onClick={() => alert('Added to Cart')}>Add to Cart</button>
-                </div>
+            <ProductCard key={product.id} product={product} />
             ))}
         </div>
     );
