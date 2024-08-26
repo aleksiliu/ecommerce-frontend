@@ -11,9 +11,10 @@ A simple e-commerce product page that fetches product data from an API and displ
 
 ### Features
 
-Users should be able to:
-
--
+- Fetch product data from a public API (Fake Store API).
+- Sorting (by price).
+- Use the React Context API to manage the state of the cart.
+- Allow users to add products to the cart and view the cart summary.
 
 ### Screenshot
 
