@@ -20,7 +20,6 @@ const ProductList = () => {
                     throw new Error('Network response was not ok');
                 }
                 const data = await response.json();
-                console.log(data)
                 setState({ products: data, loading: false, error: null });
             } catch (error) {
                 setState({ products: [], loading: false, error: (error instanceof Error) ? error.message : 'An unknown error occurred' });
