@@ -16,7 +16,7 @@ const Filter: React.FC<FilterAndSortProps> = ({
   categories,
 }) => {
   return (
-    <div style={{ marginBottom: '1rem', display: 'flex', gap: '1rem' }}>
+    <div className='mb-2 flex gap-4'>
       <div>
         <label htmlFor="sort-select">Sort by: </label>
         <select
