@@ -4,7 +4,7 @@ import type { Product } from '../types';
 
 const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
   return (
-    <div className="relative overflow-hidden rounded-lg transform shadow-md duration-300 hover:scale-105 hover:shadow-lg group">
+    <div className="bg-white relative overflow-hidden rounded-lg transform shadow-md duration-300 hover:scale-105 hover:shadow-lg group">
       <div className="relative w-full h-48">
         <img
           className="absolute inset-0 w-full h-full object-contain object-center"
