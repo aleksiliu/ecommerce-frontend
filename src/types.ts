@@ -10,3 +10,16 @@ export interface Product {
         count: number;
     };
 }
+
+export interface CartItem extends Product {
+    quantity: number;
+  }
+
+export interface FilterAndSortProps {
+    sortBy: string;
+    setSortBy: (value: string) => void;
+    filterCategory: string;
+    setFilterCategory: (value: string) => void;
+    categories: string[];
+  }
+  

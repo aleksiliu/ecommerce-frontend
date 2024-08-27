@@ -1,12 +1,5 @@
 import React from 'react';
-
-interface FilterAndSortProps {
-  sortBy: string;
-  setSortBy: (value: string) => void;
-  filterCategory: string;
-  setFilterCategory: (value: string) => void;
-  categories: string[];
-}
+import type { FilterAndSortProps } from '../types';
 
 const Filter: React.FC<FilterAndSortProps> = ({
   sortBy,
