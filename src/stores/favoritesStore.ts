@@ -18,3 +18,7 @@ export const addToFavorites = (product: Product) => {
     alert(`${product.title} is already in your favorites.`);
   }
 };
+
+export const isFavorite = (productId: number) => {
+  return $favorites.get().some(fav => fav.id === productId);
+};

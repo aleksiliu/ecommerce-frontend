@@ -1,5 +1,6 @@
 import React from 'react';
 import type { Product } from '../types';
+import { useStore } from '@nanostores/react';
 import { addToFavorites, $favorites } from '../stores/favoritesStore.ts';
 
 const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
@@ -7,9 +8,11 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
 
   const handleAddToFavorites = () => {
     addToFavorites(product);
-    alert(`${product.title} added to favorites!`);
-    console.log($favorites.get());
   };
+
+  const favorites = useStore($favorites); 
+
+  const isInFavorites = favorites.some(fav => fav.id === product.id);
 
   return (
     <div className="bg-white relative overflow-hidden rounded-lg transform shadow-md duration-300 hover:scale-105 hover:shadow-lg group">
@@ -21,9 +24,15 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
         />
         <div className="absolute top-2 right-2 p-2 rounded-full bg-white opacity-100 sm:opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <button onClick={handleAddToFavorites} className="p-2 bg-white rounded-full shadow hover:bg-gray-100">
-            <svg className="w-6 h-6 text-slate-500" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-            </svg>
+          {isInFavorites ? (
+          <svg className="w-6 h-6 text-red-500" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+        ) : (
+          <svg className="w-6 h-6 text-slate-500" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+        )}
           </button>
         </div>
       </div>
