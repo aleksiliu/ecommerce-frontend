@@ -7,7 +7,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
 
   const handleAddToFavorites = () => {
     addToFavorites(product);
-    alert(`${product.title} added to cart!`);
+    alert(`${product.title} added to favorites!`);
     console.log($favorites.get());
   };
 
