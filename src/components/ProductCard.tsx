@@ -3,6 +3,7 @@ import type { Product } from '../types';
 import { useStore } from '@nanostores/react';
 import { addToCart, isInCart } from '../stores/cartStore';
 import { addToFavorites, removeFromFavorites, $favorites } from '../stores/favoritesStore.ts';
+import Toast from './Toast.tsx';
 
 const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
 
@@ -11,6 +12,10 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
   const favorites = useStore($favorites); 
   const isInFavorites = favorites.some(fav => fav.id === product.id);
   const isInShoppingCart = isInCart(product.id);
+
+  const handleCloseToast = () => {
+    setShowToast(false);
+  };
 
   const handleToggleFavorite = () => {
     if (isInFavorites) {
@@ -107,15 +112,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
     </div>
 
 {showToast && (
-  <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-4 rounded shadow-lg z-40">
-    {product.title} added to your cart.
-    <button 
-      className="ml-2 underline" 
-      onClick={() => window.location.href='/cart'}
-    >
-      View Cart
-    </button>
-  </div>
+    <Toast message={`${product.title} added to your cart.`} onClose={handleCloseToast} />
 )}
 
 </>
