@@ -3,48 +3,34 @@ import type { Product } from '../types';
 import { useStore } from '@nanostores/react';
 import { addToCart, isInCart } from '../stores/cartStore';
 import { addToFavorites, removeFromFavorites, $favorites } from '../stores/favoritesStore.ts';
-import Toast from './Toast.tsx';
+import { useToast } from '../hooks/useToast';
 
 const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
 
-  const [toastData, setToastData] = useState<{ message: string; buttonText?: string; buttonHref?: string } | null>(null);
+  const { showToast, ToastComponent } = useToast();
 
   const favorites = useStore($favorites); 
   const isInFavorites = favorites.some(fav => fav.id === product.id);
   const isInShoppingCart = isInCart(product.id);
 
-  const handleCloseToast = () => {
-    setToastData(null);
-  };
 
   const handleToggleFavorite = () => {
     if (isInFavorites) {
       removeFromFavorites(product.id);
-      setToastData({
-        message: `${product.title} removed from your favorites.`,
-      });
+      showToast(`${product.title} removed from your favorites.`);
     } else {
       addToFavorites(product);
-      setToastData({
-        message: `${product.title} added to your favorites.`,
-        buttonText: 'View Favorites',
-        buttonHref: '/favorites',
-      });
+      showToast(`${product.title} added to your favorites.`, 'View Favorites', '/favorites');
     }
   };
 
   const handleAddToCart = () => {
     if (!isInCart(product.id)) {  
       addToCart(product);
-      setToastData({
-        message: `${product.title} added to your cart.`,
-        buttonText: 'View Cart',
-        buttonHref: '/cart',
-      });
+      showToast(`${product.title} added to your cart.`, 'View Cart', '/cart');
     } else {
       alert(`${product.title} is already in your cart.`);
     }
-    
   };
 
   return (
@@ -127,16 +113,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
       </div>
 
     </div>
-
-    {toastData && (
-        <Toast
-          message={toastData.message}
-          buttonText={toastData.buttonText}
-          buttonHref={toastData.buttonHref}
-          onClose={handleCloseToast}
-        />
-      )}
-
+    <ToastComponent />
 </>
   );
 };
