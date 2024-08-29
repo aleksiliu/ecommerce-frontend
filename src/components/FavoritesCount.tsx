@@ -12,7 +12,7 @@ const FavoritesCount: React.FC = () => {
 
   return (
     <div>
-      {favoritesCount} Favorite{favoritesCount !== 1 ? 's' : ''}
+      Favorites: {favoritesCount}
     </div>
   );
 };
