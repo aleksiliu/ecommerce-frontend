@@ -12,8 +12,8 @@ const Toast: React.FC<ToastProps> = ({
   message, 
   onClose, 
   duration = 3000, 
-  buttonText = 'View Cart', 
-  buttonHref = '/cart' 
+  buttonText, 
+  buttonHref
 }) => {
   useEffect(() => {
     const timer = setTimeout(onClose, duration);
@@ -23,12 +23,14 @@ const Toast: React.FC<ToastProps> = ({
   return (
     <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-4 rounded shadow-lg z-10">
       {message} 
-      <button 
-        className="ml-2 underline" 
-        onClick={() => window.location.href = buttonHref}
-      >
-        {buttonText}
-      </button>
+      {buttonText && buttonHref && (
+        <button 
+          className="ml-2 underline" 
+          onClick={() => window.location.href = buttonHref}
+        >
+          {buttonText}
+        </button>
+      )}
     </div>
   );
 };

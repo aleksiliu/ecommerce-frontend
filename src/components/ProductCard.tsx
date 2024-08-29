@@ -7,7 +7,7 @@ import Toast from './Toast.tsx';
 
 const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
 
-  const [toastData, setToastData] = useState<{ message: string; buttonText: string; buttonHref: string } | null>(null);
+  const [toastData, setToastData] = useState<{ message: string; buttonText?: string; buttonHref?: string } | null>(null);
 
   const favorites = useStore($favorites); 
   const isInFavorites = favorites.some(fav => fav.id === product.id);
@@ -20,6 +20,9 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
   const handleToggleFavorite = () => {
     if (isInFavorites) {
       removeFromFavorites(product.id);
+      setToastData({
+        message: `${product.title} removed from your favorites.`,
+      });
     } else {
       addToFavorites(product);
       setToastData({
