@@ -1,0 +1,11 @@
+---
+import FavoritesList from '../components/FavoritesList.tsx';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Welcome to Shop">
+  <main class="container my-8">
+    <h1>Favorites</h1>
+    <FavoritesList client:only="react" />
+  </main>
+</Layout>
