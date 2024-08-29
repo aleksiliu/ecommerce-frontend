@@ -7,14 +7,14 @@ import Toast from './Toast.tsx';
 
 const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
 
-  const [showToast, setShowToast] = useState(false);
+  const [toastData, setToastData] = useState<{ message: string; buttonText: string; buttonHref: string } | null>(null);
 
   const favorites = useStore($favorites); 
   const isInFavorites = favorites.some(fav => fav.id === product.id);
   const isInShoppingCart = isInCart(product.id);
 
   const handleCloseToast = () => {
-    setShowToast(false);
+    setToastData(null);
   };
 
   const handleToggleFavorite = () => {
@@ -22,14 +22,22 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
       removeFromFavorites(product.id);
     } else {
       addToFavorites(product);
-      setShowToast(true);  
+      setToastData({
+        message: `${product.title} added to your favorites.`,
+        buttonText: 'View Favorites',
+        buttonHref: '/favorites',
+      });
     }
   };
 
   const handleAddToCart = () => {
     if (!isInCart(product.id)) {  
       addToCart(product);
-      setShowToast(true);  
+      setToastData({
+        message: `${product.title} added to your cart.`,
+        buttonText: 'View Cart',
+        buttonHref: '/cart',
+      });
     } else {
       alert(`${product.title} is already in your cart.`);
     }
@@ -63,11 +71,11 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
           <h2 className="text-lg font-semibold text-gray-800">{product.title}</h2>
         <div className='flex justify-between gap-4'>
         <p className="text-xl mt-2 text-gray-600">${product.price.toFixed(2)}</p>
-        <button
-            className="relative px-3 py-2 text-white bg-blue-600 rounded hover:bg-blue-700 transition-colors duration-300 flex items-center"
-            onClick={handleAddToCart}
-          >
       {isInShoppingCart ? (
+          <button
+          className="relative px-3 py-2 text-white bg-green-600 rounded hover:bg-green-700 transition-colors duration-300 flex items-center"
+          onClick={handleAddToCart}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -82,8 +90,13 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
               d="M5 13l4 4L19 7"
             />
           </svg>
+          </button>
         ) : (
           <>
+            <button
+            className="relative px-3 py-2 text-white bg-blue-600 rounded hover:bg-blue-700 transition-colors duration-300 flex items-center"
+            onClick={handleAddToCart}
+          >
           <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -103,20 +116,23 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
         >
           Add to Cart
         </span>
+        </button>
         </>
         )}
-          </button>
+          
         </div>
       </div>
 
     </div>
 
-{showToast && (
-    <Toast message={`${product.title} added to your cart.`} onClose={handleCloseToast} />
-)}
-{showToast && (
-    <Toast message={`${product.title} added to your favorites.`} buttonText="View Favorites" buttonHref="/favorites "onClose={handleCloseToast} />
-)}
+    {toastData && (
+        <Toast
+          message={toastData.message}
+          buttonText={toastData.buttonText}
+          buttonHref={toastData.buttonHref}
+          onClose={handleCloseToast}
+        />
+      )}
 
 </>
   );
