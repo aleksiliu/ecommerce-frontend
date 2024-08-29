@@ -10,7 +10,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
 
   const favorites = useStore($favorites); 
   const isInFavorites = favorites.some(fav => fav.id === product.id);
-
+  const isInShoppingCart = isInCart(product.id);
 
   const handleToggleFavorite = () => {
     if (isInFavorites) {
@@ -62,25 +62,44 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
             className="relative px-3 py-2 text-white bg-blue-600 rounded hover:bg-blue-700 transition-colors duration-300 flex items-center"
             onClick={handleAddToCart}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="2"
-              stroke="currentColor"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 6h12M16 13l2 6M6 16h12M7 19a2 2 0 110 4 2 2 0 010-4zm10 0a2 2 0 110 4 2 2 0 010-4z"
-              />
-            </svg>
-            <span
-              className="ml-2 hidden group-hover:inline"
-            >
-              Add to Cart
-            </span>
+      {isInShoppingCart ? (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            className="w-6 h-6 text-white"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M5 13l4 4L19 7"
+            />
+          </svg>
+        ) : (
+          <>
+          <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth="2"
+          stroke="currentColor"
+          className="w-6 h-6"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 6h12M16 13l2 6M6 16h12M7 19a2 2 0 110 4 2 2 0 010-4zm10 0a2 2 0 110 4 2 2 0 010-4z"
+          />
+        </svg>
+        <span
+          className="ml-2 hidden group-hover:inline"
+        >
+          Add to Cart
+        </span>
+        </>
+        )}
           </button>
         </div>
       </div>
