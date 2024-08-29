@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import type { Product } from '../types';
 import { useStore } from '@nanostores/react';
-import { addToCart } from '../stores/cartStore';
+import { addToCart, isInCart } from '../stores/cartStore';
 import { addToFavorites, removeFromFavorites, $favorites } from '../stores/favoritesStore.ts';
 
 const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
@@ -20,12 +20,15 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
     }
   };
 
-  const handleToggleCart = () => {
+  const handleAddToCart = () => {
+    if (!isInCart(product.id)) {  
       addToCart(product);
-      setShowToast(true); // Show toast notification
-
-      // Hide the toast after a few seconds
+      setShowToast(true);  
       setTimeout(() => setShowToast(false), 3000);
+    } else {
+      alert(`${product.title} is already in your cart.`);
+    }
+    
   };
 
   return (
@@ -57,7 +60,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
         <p className="text-xl mt-2 text-gray-600">${product.price.toFixed(2)}</p>
         <button
             className="relative px-3 py-2 text-white bg-blue-600 rounded hover:bg-blue-700 transition-colors duration-300 flex items-center"
-            onClick={handleToggleCart}
+            onClick={handleAddToCart}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

@@ -14,9 +14,7 @@ export const addToCart = (product: Product) => {
 
   if (!isAlreadyInCart) {
     $cart.set([...currentCart, product]);
-  } else {
-    alert(`${product.title} is already in your cart.`);
-  }
+  } 
 };
 
 // Function to remove a product from the cart
