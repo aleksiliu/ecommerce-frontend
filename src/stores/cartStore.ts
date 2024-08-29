@@ -1,5 +1,20 @@
+import { atom } from 'nanostores';
 import { persistentAtom } from '@nanostores/persistent';
 import type { Product } from '../types';
+
+
+// Store to manage the cart's open state
+export const $isCartOpen = atom<boolean>(false);
+
+// Function to open the cart
+export const openCart = () => {
+  $isCartOpen.set(true);
+};
+
+// Function to close the cart
+export const closeCart = () => {
+  $isCartOpen.set(false);
+};
 
 // Create a persistent store for cart contents
 export const $cart = persistentAtom<Product[]>('cart', [], {

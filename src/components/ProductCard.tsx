@@ -4,6 +4,7 @@ import { useStore } from '@nanostores/react';
 import { addToCart, isInCart } from '../stores/cartStore';
 import { addToFavorites, removeFromFavorites, $favorites } from '../stores/favoritesStore.ts';
 import { useToast } from '../hooks/useToast';
+import { openCart } from '../stores/cartStore';
 
 const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
 
@@ -26,6 +27,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
   const handleAddToCart = () => {
     if (!isInCart(product.id)) {  
       addToCart(product);
+      openCart();
       showToast(`${product.title} added to your cart.`, 'View Cart', '/cart');
     } else {
       alert(`${product.title} is already in your cart.`);
@@ -36,7 +38,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
     <>
       <div className="bg-white relative overflow-hidden rounded-lg transform shadow-md duration-300 hover:scale-105 hover:shadow-lg group">
         <div className="flex flex-col h-full">
-          <div className="relative w-full h-48">
+          <div className="relative w-full h-48 py-4">
             <img
               className="absolute inset-0 w-full h-full object-contain object-center"
               src={product.image}
