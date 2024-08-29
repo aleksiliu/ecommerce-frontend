@@ -1,12 +1,14 @@
 import React from 'react';
 import type { Product } from '../types';
 import { useStore } from '@nanostores/react';
+import { addToCart } from '../stores/cartStore';
 import { addToFavorites, removeFromFavorites, $favorites } from '../stores/favoritesStore.ts';
 
 const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
 
   const favorites = useStore($favorites); 
   const isInFavorites = favorites.some(fav => fav.id === product.id);
+
 
   const handleToggleFavorite = () => {
     if (isInFavorites) {
@@ -16,6 +18,9 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
     }
   };
 
+  const handleToggleCart = () => {
+      addToCart(product);
+  };
 
   return (
     <div className="bg-white relative overflow-hidden rounded-lg transform shadow-md duration-300 hover:scale-105 hover:shadow-lg group">
@@ -45,7 +50,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
         <p className="text-xl mt-2 text-gray-600">${product.price.toFixed(2)}</p>
         <button
             className="relative px-3 py-2 text-white bg-blue-600 rounded hover:bg-blue-700 transition-colors duration-300 flex items-center"
-            onClick={() => alert('Added to Cart')}
+            onClick={handleToggleCart}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

@@ -5,8 +5,7 @@ import type { Product } from '../types';
 import ProductCard from './ProductCard';
 
 const FavoritesList: React.FC = () => {
-  const favorites = useStore($favorites); // Automatically re-renders when $favorites changes
-  console.log(favorites)
+  const favorites = useStore($favorites);
 
   if (favorites.length === 0) {
     return <p>You have no favorite items yet.</p>;
