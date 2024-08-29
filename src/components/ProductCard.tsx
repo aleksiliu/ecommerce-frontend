@@ -1,18 +1,18 @@
 import React from 'react';
 import type { Product } from '../types';
 import { useStore } from '@nanostores/react';
-import { addToCart, isInCart } from '../stores/cartStore';
-import { addToFavorites, removeFromFavorites, $favorites } from '../stores/favoritesStore.ts';
+import { $cart, addToCart, isInCart, removeFromCart, openCart } from '../stores/cartStore';
+import { addToFavorites, removeFromFavorites, $favorites } from '../stores/favoritesStore';
 import { useToast } from '../hooks/useToast';
-import { openCart } from '../stores/cartStore';
 
 const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
-
   const { showToast, ToastComponent } = useToast();
+  
+  const favorites = useStore($favorites);
+  useStore($cart);  
 
-  const favorites = useStore($favorites); 
   const isInFavorites = favorites.some(fav => fav.id === product.id);
-  const isInShoppingCart = isInCart(product.id);
+  const isInShoppingCart = isInCart(product.id); 
 
   const handleToggleFavorite = () => {
     if (isInFavorites) {
@@ -25,10 +25,10 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
   };
 
   const handleAddToCart = () => {
-    if (!isInCart(product.id)) {  
+    if (!isInShoppingCart) {  
       addToCart(product);
       openCart();
-      showToast(`${product.title} added to your cart.`, 'View Cart', '/cart');
+      showToast(`${product.title} added to your cart.`);
     } else {
       alert(`${product.title} is already in your cart.`);
     }
@@ -52,7 +52,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
               {isInShoppingCart ? (
                 <button
                   className="relative px-3 py-2 text-white bg-green-600 rounded hover:bg-green-700 transition-colors duration-300 flex items-center"
-                  onClick={handleAddToCart}
+                  onClick={handleAddToCart} 
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
