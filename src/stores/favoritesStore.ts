@@ -21,6 +21,13 @@ export const addToFavorites = (product: Product) => {
   }
 };
 
+
+// Optional: Function to remove a product from favorites
+export const removeFromFavorites = (productId: number) => {
+  const updatedFavorites = $favorites.get().filter(fav => fav.id !== productId);
+  $favorites.set(updatedFavorites);
+};
+
 // Function to check if a product is in favorites
 export const isFavorite = (productId: number) => {
   return $favorites.get().some(fav => fav.id === productId);
