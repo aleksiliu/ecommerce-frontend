@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import type { Product } from '../types';
 import { useStore } from '@nanostores/react';
 import { addToCart } from '../stores/cartStore';
 import { addToFavorites, removeFromFavorites, $favorites } from '../stores/favoritesStore.ts';
 
 const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
+
+  const [showToast, setShowToast] = useState(false);
 
   const favorites = useStore($favorites); 
   const isInFavorites = favorites.some(fav => fav.id === product.id);
@@ -20,9 +22,14 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
 
   const handleToggleCart = () => {
       addToCart(product);
+      setShowToast(true); // Show toast notification
+
+      // Hide the toast after a few seconds
+      setTimeout(() => setShowToast(false), 3000);
   };
 
   return (
+    <>
     <div className="bg-white relative overflow-hidden rounded-lg transform shadow-md duration-300 hover:scale-105 hover:shadow-lg group">
       <div className="relative w-full h-48">
         <img
@@ -74,7 +81,22 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
           </button>
         </div>
       </div>
+
     </div>
+
+{showToast && (
+  <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-4 rounded shadow-lg z-40">
+    {product.title} added to your cart.
+    <button 
+      className="ml-2 underline" 
+      onClick={() => window.location.href='/cart'}
+    >
+      View Cart
+    </button>
+  </div>
+)}
+
+</>
   );
 };
 
