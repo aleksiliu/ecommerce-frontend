@@ -22,6 +22,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
       removeFromFavorites(product.id);
     } else {
       addToFavorites(product);
+      setShowToast(true);  
     }
   };
 
@@ -29,7 +30,6 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
     if (!isInCart(product.id)) {  
       addToCart(product);
       setShowToast(true);  
-      setTimeout(() => setShowToast(false), 3000);
     } else {
       alert(`${product.title} is already in your cart.`);
     }
@@ -113,6 +113,9 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
 
 {showToast && (
     <Toast message={`${product.title} added to your cart.`} onClose={handleCloseToast} />
+)}
+{showToast && (
+    <Toast message={`${product.title} added to your favorites.`} buttonText="View Favorites" buttonHref="/favorites "onClose={handleCloseToast} />
 )}
 
 </>
