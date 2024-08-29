@@ -1,5 +1,6 @@
 ---
 import FavoritesCount from '../components/FavoritesCount.tsx';
+import CartTotal from '../components/CartTotal.tsx';
 ---
 
 <header class="bg-gray-900 text-white p-4">
@@ -12,7 +13,7 @@ import FavoritesCount from '../components/FavoritesCount.tsx';
         >
       </li>
       <li>
-        <a href="/cart" class="hover:underline">Cart</a>
+        <a href="/cart" class="hover:underline"><CartTotal client:load /> </a>
       </li>
     </ul>
   </nav>
