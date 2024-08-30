@@ -50,7 +50,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
               <p className="text-xl text-gray-600">${product.price.toFixed(2)}</p>
               {isInShoppingCart ? (
                 <button
-                  className="relative px-3 py-2 text-white bg-slate-800 rounded hover:bg-slate-900 transition-colors duration-300 flex items-center"
+                  className="relative px-3 py-2 bg-slate-800 rounded hover:bg-slate-900 transition-colors duration-300 flex items-center"
                   onClick={handleAddToCart} 
                 >
                   <svg
@@ -70,7 +70,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
                 </button>
               ) : (
                 <button
-                  className="relative px-3 py-2 text-white border text-slate-800 hover:text-white border-slate-800 rounded hover:bg-slate-900 transition-colors duration-300 flex items-center"
+                  className="relative px-3 py-2 border text-slate-800 hover:text-white border-slate-800 rounded hover:bg-slate-900 transition-colors duration-300 flex items-center"
                   onClick={handleAddToCart}
                 >
                   <svg
