@@ -13,7 +13,7 @@ const CartTotal: React.FC = () => {
   };
 
   return (
-    <a href="#" className="relative hover:underline" onClick={handleClick}>
+    <a href="#" className="relative flex gap-2" onClick={handleClick}>
     <span>
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -31,7 +31,7 @@ const CartTotal: React.FC = () => {
       </svg>
     </span>
     {totalItems > 0 && (
-      <span className="absolute top-0 left-4 inline-flex items-center justify-center h-4 w-4 text-xs leading-none text-white bg-green-600 rounded-full">
+      <span className="inline-flex items-center justify-center h-6 w-6 text-xs leading-none font-bold text-white bg-slate-700 rounded-full">
         {totalItems}
       </span>
     )}
