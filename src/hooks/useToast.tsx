@@ -2,10 +2,14 @@ import { useState } from 'react';
 import Toast from '../components/Toast';
 
 export const useToast = () => {
-  const [toastData, setToastData] = useState<{ message: string; buttonText?: string; buttonHref?: string } | null>(null);
+  const [toastData, setToastData] = useState<{ 
+    message: string; 
+    buttonText?: string; 
+    buttonAction?: () => void; 
+  } | null>(null);
 
-  const showToast = (message: string, buttonText?: string, buttonHref?: string) => {
-    setToastData({ message, buttonText, buttonHref });
+  const showToast = (message: string, buttonText?: string, buttonAction?: () => void) => {
+    setToastData({ message, buttonText, buttonAction });
     setTimeout(() => {
       setToastData(null);
     }, 3000); 
@@ -16,7 +20,7 @@ export const useToast = () => {
       <Toast
         message={toastData.message}
         buttonText={toastData.buttonText}
-        buttonHref={toastData.buttonHref}
+        buttonAction={toastData.buttonAction}
         onClose={() => setToastData(null)}
       />
     ) : null;

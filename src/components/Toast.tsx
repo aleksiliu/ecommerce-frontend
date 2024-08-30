@@ -5,7 +5,7 @@ interface ToastProps {
   onClose: () => void;
   duration?: number;
   buttonText?: string;
-  buttonHref?: string;
+  buttonAction?: () => void; // Add a buttonAction prop for custom button actions
 }
 
 const Toast: React.FC<ToastProps> = ({ 
@@ -13,7 +13,7 @@ const Toast: React.FC<ToastProps> = ({
   onClose, 
   duration = 3000, 
   buttonText, 
-  buttonHref
+  buttonAction
 }) => {
   useEffect(() => {
     const timer = setTimeout(onClose, duration);
@@ -23,10 +23,10 @@ const Toast: React.FC<ToastProps> = ({
   return (
     <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-4 rounded shadow-lg z-10">
       {message} 
-      {buttonText && buttonHref && (
+      {buttonText && buttonAction && (
         <button 
           className="ml-2 underline" 
-          onClick={() => window.location.href = buttonHref}
+          onClick={buttonAction} // Trigger the custom action on button click
         >
           {buttonText}
         </button>

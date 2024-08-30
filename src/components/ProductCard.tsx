@@ -20,15 +20,14 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
       showToast(`${product.title} removed from your favorites.`);
     } else {
       addToFavorites(product);
-      showToast(`${product.title} added to your favorites.`, 'View Favorites', '/favorites');
+      showToast(`${product.title} added to your favorites.`, 'View Favorites', () => window.location.href = '/favorites');
     }
   };
 
   const handleAddToCart = () => {
     if (!isInShoppingCart) {  
       addToCart(product);
-      openCart();
-      showToast(`${product.title} added to your cart.`);
+      showToast(`${product.title} added to your cart.`, 'View Cart', openCart); 
     } else {
       alert(`${product.title} is already in your cart.`);
     }
