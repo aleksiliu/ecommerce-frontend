@@ -9,6 +9,8 @@ const CartSidebar: React.FC = () => {
   const cart = useStore($cart);
   const isOpen = useStore($isCartOpen);
 
+  const totalItems = cart.length;
+
   if (!isOpen) return null;
 
   return (
@@ -18,7 +20,7 @@ const CartSidebar: React.FC = () => {
       } z-50`}
     >
       <div className="p-4 flex justify-between items-center border-b">
-        <h2 className="text-xl font-semibold">Your Cart</h2>
+        <h2 className="text-xl font-semibold">Your Cart ({totalItems})</h2>
         <button onClick={closeCart} className="text-gray-500 hover:text-gray-700">
           Close
         </button>
