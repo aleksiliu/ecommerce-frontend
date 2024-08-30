@@ -28,7 +28,7 @@ const Toast: React.FC<ToastProps> = ({
           className="ml-2 underline" 
           onClick={buttonAction} // Trigger the custom action on button click
         >
-          {buttonText}
+        {buttonText}
         </button>
       )}
     </div>
