@@ -14,6 +14,14 @@ const CartSidebar: React.FC = () => {
   if (!isOpen) return null;
 
   return (
+    <>
+      {/* Dark overlay behind the sidebar */}
+      <div
+        className={`fixed inset-0 bg-black bg-opacity-50 transition-opacity duration-300 ${
+          isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        }`}
+        onClick={closeCart} 
+      />
     <div
       className={`fixed top-0 right-0 h-full w-80 bg-white shadow-lg transform transition-transform duration-300 ease-in-out ${
         isOpen ? 'translate-x-0' : '-translate-x-full'
@@ -75,6 +83,7 @@ const CartSidebar: React.FC = () => {
         </div>
       }
     </div>
+    </>
   );
 };
 
