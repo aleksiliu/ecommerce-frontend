@@ -5,7 +5,7 @@ interface ToastProps {
   onClose: () => void;
   duration?: number;
   buttonText?: string;
-  buttonAction?: () => void; // Add a buttonAction prop for custom button actions
+  buttonAction?: () => void; 
 }
 
 const Toast: React.FC<ToastProps> = ({ 
@@ -26,7 +26,7 @@ const Toast: React.FC<ToastProps> = ({
       {buttonText && buttonAction && (
         <button 
           className="ml-2 underline" 
-          onClick={buttonAction} // Trigger the custom action on button click
+          onClick={buttonAction} 
         >
         {buttonText}
         </button>
