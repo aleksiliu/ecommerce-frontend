@@ -9,6 +9,7 @@ const CartSidebar: React.FC = () => {
   const isOpen = useStore($isCartOpen);
 
   const totalItems = cart.length;
+  const totalPrice = cart.reduce((total, product) => total + product.price, 0).toFixed(2);
 
   if (!isOpen) return null;
 
@@ -24,7 +25,7 @@ const CartSidebar: React.FC = () => {
           Close
         </button>
       </div>
-      <div className="p-4 overflow-y-auto h-[calc(100%-56px)]">
+      <div className="p-4 overflow-y-auto h-[calc(100%-135px)]"> 
         {cart.length === 0 ? (
           <p>Your cart is empty.</p>
         ) : (
@@ -66,6 +67,13 @@ const CartSidebar: React.FC = () => {
           ))
         )}
       </div>
+      {cart.length > 0 && 
+        <div className="p-4 border-t">
+          <button onClick={() => alert('Thanks for shopping')}className="w-full px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors duration-300">
+        Confirm Order ${totalPrice} 
+          </button>
+        </div>
+      }
     </div>
   );
 };
