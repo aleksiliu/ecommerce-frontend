@@ -20,9 +20,12 @@ const { title } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
-  <body>
+  <body class="min-h-screen flex flex-col">
     <Header />
-    <slot />
+    <!-- Main content area -->
+    <main class="container my-8 flex-grow">
+      <slot />
+    </main>
     <CartSidebar client:load />
     <Footer />
   </body>
