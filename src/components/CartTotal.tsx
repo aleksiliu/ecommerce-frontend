@@ -31,7 +31,7 @@ const CartTotal: React.FC = () => {
       </svg>
     </span>
     {totalItems > 0 && (
-      <span className="absolute top-2 left-4 inline-flex items-center justify-center h-4 w-4 text-xs leading-none text-white bg-green-600 rounded-full">
+      <span className="absolute top-0 left-4 inline-flex items-center justify-center h-4 w-4 text-xs leading-none text-white bg-green-600 rounded-full">
         {totalItems}
       </span>
     )}

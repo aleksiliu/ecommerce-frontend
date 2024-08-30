@@ -4,7 +4,6 @@ import { $cart, removeFromCart } from '../stores/cartStore';
 import type { Product } from '../types';
 import { $isCartOpen, closeCart } from '../stores/cartStore';
 
-
 const CartSidebar: React.FC = () => {
   const cart = useStore($cart);
   const isOpen = useStore($isCartOpen);
@@ -31,15 +30,37 @@ const CartSidebar: React.FC = () => {
         ) : (
           cart.map((product: Product) => (
             <div key={product.id} className="flex justify-between items-center mb-4">
-              <div>
-                <h4 className="font-semibold">{product.title}</h4>
-                <p className="text-gray-600">${product.price.toFixed(2)}</p>
+              <div className="flex items-center">
+                <div className="w-16 h-16 flex-shrink-0">
+                  <img
+                    src={product.image}
+                    alt={product.title}
+                    className="w-full h-full object-contain rounded"
+                  />
+                </div>
+                <div className="ml-4">
+                  <h4 className="font-semibold">{product.title}</h4>
+                  <p className="text-gray-600">${product.price.toFixed(2)}</p>
+                </div>
               </div>
               <button
                 onClick={() => removeFromCart(product.id)}
-                className="text-red-500 hover:text-red-700"
+                className="text-slate-500 hover:text-slate-700"
               >
-                Remove
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="2"
+                  stroke="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
               </button>
             </div>
           ))
