@@ -4,10 +4,9 @@ A simple e-commerce product page that fetches product data from an API and displ
 
 ### Learning goals
 
-- React Context API
-- Fetch
 - TypeScript
-- How to combine Astro and React
+- Astro
+- Nanostores
 
 ### Features
 
