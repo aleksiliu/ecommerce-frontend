@@ -11,8 +11,8 @@ A simple e-commerce product page that fetches product data from an API and displ
 ### Features
 
 - Fetch product data from a public API (Fake Store API).
-- Sorting (by price).
-- Use the React Context API to manage the state of the cart.
+- Sorting (by price and category).
+- Use Nanostores to manage the state of the cart and favorites.
 - Allow users to add products to the cart and view the cart summary.
 - Skeleton Loader Card
 
