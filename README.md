@@ -6,13 +6,13 @@ A simple e-commerce product page that fetches product data from an API and displ
 
 - TypeScript
 - Astro
-- Nanostores
+- Nano Stores
 
 ### Features
 
 - Fetch product data from a public API (Fake Store API).
 - Sorting (by price and category).
-- Use Nanostores to manage the state of the cart and favorites.
+- Use NNano Stores to manage the state of the cart and favorites.
 - Allow users to add products to the cart and view the cart summary.
 - Skeleton Loader Card
 
