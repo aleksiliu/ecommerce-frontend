@@ -35,11 +35,11 @@ A simple e-commerce product page that fetches product data from an API and displ
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/your-repo-name.git
+   git clone https://github.com/aleksiliu/ecommerce-frontend.git
    ```
 2. Navigate to the project directory:
    ```bash
-   cd your-repo-name
+   cd ecommerce-frontend
    ```
 3. Install dependencies:
    ```bash
